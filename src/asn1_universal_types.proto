@@ -19,30 +19,30 @@
 // possible types.
 syntax = "proto2";
 
-import "google/protobuf/timestamp.proto";
-
 package asn1_universal_types;
+
+import "google/protobuf/timestamp.proto";
 
 // This represents an ASN.1 Boolean, which takes on the value true or false
 // (X.690 (2015), 8.2).
 message Boolean {
-  required bool val = 1;
+  optional bool val = 1;
 }
 
 // This represents an ASN.1 OCTET STRING, which denotes an arbitrary string of
 // bits (X.690 (2015), 8.7).
 message OctetString {
-  required bytes val = 1;
+  optional bytes val = 1;
 }
 
 // This represents an ASN.1 BIT STRING, which denotes an arbitrary string of
 // bits (X.690 (2015), 8.6).
 message BitString {
-  required bytes val = 1;
+  optional bytes val = 1;
   // The initial octet shall encode, as an unsigned binary integer
   // with bit 1 as the least significant bit, the number of unused bits
   // in the final subsequent octet (X.690 (2015), 8.6.2.2).
-  required UnusedBits unused_bits = 2;
+  optional UnusedBits unused_bits = 2;
 }
 
 // The number shall be in the range zero to seven. (X.690 (2015), 8.6.2.2).
@@ -61,23 +61,23 @@ enum UnusedBits {
 // compliment number (X.690 (2015), 8.3).
 message Integer {
   // Use a series of bytes and let the fuzzer make it positive or negative.
-  required bytes val = 1;
+  optional bytes val = 1;
 }
 
 // This represents an ASN.1 UTCTime (X.690 (2015), 11.8).
 message UTCTime {
-  required google.protobuf.Timestamp time_stamp = 1;
+  optional google.protobuf.Timestamp time_stamp = 1;
 }
 
 // This represents an ASN.1 GeneralizedTime (X.690 (2015), 11.7).
 message GeneralizedTime {
-  required google.protobuf.Timestamp time_stamp = 1;
+  optional google.protobuf.Timestamp time_stamp = 1;
 }
 
 // This represents an ASN.1 ObjectIdentifier (X.690 (2015), 8.19).
 message ObjectIdentifier {
-  required RootNode root = 1;
-  required SmallIdentifier small_identifier = 2;
+  optional RootNode root = 1;
+  optional SmallIdentifier small_identifier = 2;
   // The contents octets shall be a list of encodings of
   // subidentifiers (X.690 (2015), 8.19.2-4).
   repeated uint32 subidentifier = 4;
